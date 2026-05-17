@@ -21,8 +21,21 @@
       Download AppImage
     </a>
 
-    <p class="mt-8 text-xs text-gray-400">
-      Download, run <code class="bg-gray-100 px-1 rounded">chmod +x Messenger-x86_64.AppImage</code>, then double-click.
+    <div class="mt-8 border-t border-gray-200 pt-6">
+      <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Install via wget</p>
+      <div class="bg-gray-900 text-green-400 rounded-xl p-4 text-left text-xs font-mono leading-relaxed overflow-x-auto">
+        <div><span class="text-gray-500"># One-liner install (download + shortcut)</span></div>
+        <div class="mt-1">wget -qO- <span class="text-yellow-300">https://work-message.onrender.com/install.sh</span> | bash</div>
+        <div class="mt-3"><span class="text-gray-500"># Or download &amp; run manually</span></div>
+        <div class="mt-1">wget <span class="text-yellow-300">https://work-message.onrender.com/Messenger-x86_64.AppImage</span></div>
+        <div>chmod +x Messenger-x86_64.AppImage</div>
+        <div>./Messenger-x86_64.AppImage</div>
+      </div>
+    </div>
+
+    <p class="mt-6 text-xs text-gray-400">
+      The install script places the AppImage in <code class="bg-gray-100 px-1 rounded">~/.local/share/Messenger/</code>
+      and adds a desktop shortcut to your application menu.
     </p>
   </div>
 </body>
