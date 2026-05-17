@@ -6,40 +6,93 @@
   <title>Download Messenger</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-br from-indigo-500 to-purple-700 min-h-screen flex items-center justify-center p-4">
-  <div class="bg-white rounded-2xl shadow-2xl p-10 max-w-lg w-full text-center">
-    <h1 class="text-3xl font-bold text-gray-800 mb-2">Download Messenger</h1>
-    <p class="text-gray-500 mb-8">Choose your platform</p>
+<body class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-10 max-w-xl w-full">
 
-    <!-- Linux download -->
-    <div class="bg-gray-50 rounded-xl p-4 mb-6 text-left">
-      <p class="font-semibold text-gray-800 text-sm mb-2">Linux</p>
-      <p class="text-xs text-gray-500 mb-3">Filename: <span class="font-semibold text-gray-800">Messenger-x86_64.AppImage</span> &mdash; 11 MB</p>
-      <a href="Messenger-x86_64.AppImage" download
-         class="inline-block bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold px-8 py-3 rounded-xl hover:from-indigo-600 hover:to-purple-700 transition transform hover:-translate-y-0.5 hover:shadow-lg text-sm">
-        Download AppImage
-      </a>
-      <div class="mt-3 relative bg-gray-900 text-green-400 rounded-xl text-left text-xs font-mono overflow-hidden">
-        <div class="flex items-center justify-between px-4 py-3">
-          <code class="text-yellow-300">wget -qO- https://work-message.onrender.com/install.sh | bash</code>
-          <button onclick="navigator.clipboard.writeText('wget -qO- https://work-message.onrender.com/install.sh | bash').then(()=>{this.textContent='Copied!';setTimeout(()=>{this.textContent='Copy'},2000)})"
-                  class="ml-4 shrink-0 bg-gray-700 hover:bg-gray-600 text-white text-xs px-3 py-1.5 rounded-lg transition whitespace-nowrap">
-            Copy
-          </button>
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-lg mb-4">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+        </svg>
+      </div>
+      <h1 class="text-3xl font-bold text-gray-800">Messenger</h1>
+      <p class="text-gray-400 text-sm mt-1">Choose your platform to get started</p>
+    </div>
+
+    <!-- Linux -->
+    <div class="bg-gradient-to-r from-gray-50 to-gray-100/80 rounded-2xl p-5 mb-4 border border-gray-200/60 hover:border-indigo-200 transition">
+      <div class="flex items-start gap-4">
+        <div class="shrink-0 w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center">
+          <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 3.75H6.912a2.25 2.25 0 00-2.15 1.588L2.35 13.177a2.25 2.25 0 00-.1.661V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 00-2.15-1.588H15M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859M12 3v8.25m0 0l-3-3m3 3l3-3"/>
+          </svg>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center justify-between">
+            <h2 class="font-semibold text-gray-800">Linux</h2>
+            <span class="text-xs text-gray-400 font-mono">11 MB</span>
+          </div>
+          <p class="text-xs text-gray-400 mt-0.5">AppImage &bull; portable, no install needed</p>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <a href="Messenger-x86_64.AppImage" download
+               class="inline-flex items-center gap-1.5 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-medium px-5 py-2.5 rounded-xl hover:from-indigo-600 hover:to-purple-700 transition transform hover:-translate-y-0.5 hover:shadow-lg shadow-indigo-200">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/>
+              </svg>
+              Download AppImage
+            </a>
+          </div>
+          <div class="mt-3 relative bg-gray-900 rounded-xl text-xs font-mono overflow-hidden">
+            <div class="flex items-center justify-between px-3.5 py-2.5">
+              <div class="flex items-center gap-2 min-w-0">
+                <svg class="w-3.5 h-3.5 text-gray-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"/>
+                </svg>
+                <code class="text-green-400 truncate">wget -qO- https://work-message.onrender.com/install.sh | bash</code>
+              </div>
+              <button onclick="navigator.clipboard.writeText('wget -qO- https://work-message.onrender.com/install.sh | bash').then(()=>{this.textContent='Copied!';setTimeout(()=>{this.textContent='Copy'},2000)})"
+                      class="ml-3 shrink-0 bg-gray-700 hover:bg-gray-600 text-white text-xs px-3 py-1.5 rounded-lg transition">
+                Copy
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Windows download -->
-    <div class="bg-gray-50 rounded-xl p-4 text-left">
-      <p class="font-semibold text-gray-800 text-sm mb-2">Windows</p>
-      <p class="text-xs text-gray-500 mb-3">Filename: <span class="font-semibold text-gray-800">Messenger-win64.zip</span> &mdash; 3 MB</p>
-      <a href="Messenger-win64.zip" download
-         class="inline-block bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold px-8 py-3 rounded-xl hover:from-emerald-600 hover:to-teal-700 transition transform hover:-translate-y-0.5 hover:shadow-lg text-sm">
-        Download ZIP (Windows)
-      </a>
-      <p class="text-xs text-gray-400 mt-3">Extract and run <span class="font-mono">run.bat</span> or <span class="font-mono">message_app.exe</span>. No installation required.</p>
+    <!-- Windows -->
+    <div class="bg-gradient-to-r from-gray-50 to-gray-100/80 rounded-2xl p-5 border border-gray-200/60 hover:border-emerald-200 transition">
+      <div class="flex items-start gap-4">
+        <div class="shrink-0 w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center">
+          <svg class="w-5 h-5 text-emerald-600" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M0 0h11.5v11.5H0V0zm12.5 0H24v11.5H12.5V0zM0 12.5h11.5V24H0V12.5zm12.5 0H24V24H12.5V12.5z"/>
+          </svg>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center justify-between">
+            <h2 class="font-semibold text-gray-800">Windows</h2>
+            <span class="text-xs text-gray-400 font-mono">3 MB</span>
+          </div>
+          <p class="text-xs text-gray-400 mt-0.5">Portable ZIP &bull; no installation required</p>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <a href="Messenger-win64.zip" download
+               class="inline-flex items-center gap-1.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-sm font-medium px-5 py-2.5 rounded-xl hover:from-emerald-600 hover:to-teal-700 transition transform hover:-translate-y-0.5 hover:shadow-lg shadow-emerald-200">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/>
+              </svg>
+              Download ZIP
+            </a>
+          </div>
+          <p class="text-xs text-gray-400 mt-3">Extract and run <span class="font-mono text-gray-500 bg-gray-200/60 px-1.5 py-0.5 rounded">run.bat</span></p>
+        </div>
+      </div>
     </div>
+
+    <!-- Footer -->
+    <p class="text-center text-xs text-gray-400 mt-6">
+      No installation required for either version &mdash; just download and run.
+    </p>
   </div>
 </body>
 </html>
