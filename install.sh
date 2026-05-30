@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-APPIMAGE_URL="https://work-message.onrender.com/Messenger-x86_64.AppImage"
-APPIMAGE_NAME="Messenger-x86_64.AppImage"
-APP_NAME="Messenger"
-APP_COMMENT="Messenger for Linux"
+APPIMAGE_URL="https://work-message.onrender.com/Conversate-x86_64.AppImage"
+APPIMAGE_NAME="Conversate-x86_64.AppImage"
+APP_NAME="Conversate"
+APP_COMMENT="Conversate - Fast messaging for Linux"
 
 BIN_DIR="$HOME/.local/bin"
-APP_DIR="$HOME/.local/share/Messenger"
+APP_DIR="$HOME/.local/share/Conversate"
 DESKTOP_DIR="$HOME/.local/share/applications"
 ICON_DIR="$HOME/.local/share/icons/hicolor/256x256/apps"
 
-echo "==> Messenger Installer"
+echo "==> Conversate Installer"
 echo ""
 
 # --- Download ---
@@ -39,13 +39,32 @@ echo "==> Creating desktop shortcut ..."
 mkdir -p "$DESKTOP_DIR"
 mkdir -p "$ICON_DIR"
 
-# Extract icon from AppImage if possible
-if "$APP_DIR/$APPIMAGE_NAME" --appimage-extract ".DirIcon" &>/dev/null; then
-  echo "==> Extracting icon from AppImage ..."
+# Try to use butterflylogo.webp (bundled alongside this script) as icon
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+ICON_SRC="$SCRIPT_DIR/butterflylogo.webp"
+if [ -f "$ICON_SRC" ]; then
+  echo "==> Converting butterflylogo.webp to icon ..."
+  if command -v convert &>/dev/null; then
+    convert "$ICON_SRC" "$ICON_DIR/$APP_NAME.png"
+  elif command -v ffmpeg &>/dev/null; then
+    ffmpeg -y -i "$ICON_SRC" "$ICON_DIR/$APP_NAME.png" 2>/dev/null
+  elif command -v dwebp &>/dev/null; then
+    dwebp "$ICON_SRC" -o "$ICON_DIR/$APP_NAME.png" 2>/dev/null
+  else
+    echo "==> No webp converter found, trying to extract icon from AppImage ..."
+    "$APP_DIR/$APPIMAGE_NAME" --appimage-extract ".DirIcon" &>/dev/null || true
+    if [ -f squashfs-root/.DirIcon ]; then
+      cp squashfs-root/.DirIcon "$ICON_DIR/$APP_NAME.png" 2>/dev/null || true
+    fi
+    rm -rf squashfs-root 2>/dev/null || true
+  fi
+else
+  echo "==> butterflylogo.webp not found, extracting icon from AppImage ..."
+  "$APP_DIR/$APPIMAGE_NAME" --appimage-extract ".DirIcon" &>/dev/null || true
   if [ -f squashfs-root/.DirIcon ]; then
     cp squashfs-root/.DirIcon "$ICON_DIR/$APP_NAME.png" 2>/dev/null || true
   fi
-  rm -rf squashfs-root
+  rm -rf squashfs-root 2>/dev/null || true
 fi
 
 cat > "$DESKTOP_DIR/$APP_NAME.desktop" << EOF
@@ -57,7 +76,7 @@ Exec=$APP_DIR/$APPIMAGE_NAME
 Icon=$APP_NAME
 Terminal=false
 Categories=Network;InstantMessaging;
-StartupWMClass=Messenger
+StartupWMClass=Conversate
 EOF
 
 echo "==> Updating desktop database ..."
