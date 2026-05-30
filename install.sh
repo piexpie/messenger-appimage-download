@@ -40,21 +40,22 @@ mkdir -p "$DESKTOP_DIR"
 mkdir -p "$ICON_DIR"
 
 # Try to use butterflylogo.webp (bundled alongside this script) as icon
+ICON_NAME="$(echo "$APP_NAME" | tr '[:upper:]' '[:lower:]')"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 ICON_SRC="$SCRIPT_DIR/butterflylogo.webp"
 if [ -f "$ICON_SRC" ]; then
   echo "==> Converting butterflylogo.webp to icon ..."
   if command -v convert &>/dev/null; then
-    convert "$ICON_SRC" "$ICON_DIR/$APP_NAME.png"
+    convert "$ICON_SRC" "$ICON_DIR/$ICON_NAME.png"
   elif command -v ffmpeg &>/dev/null; then
-    ffmpeg -y -i "$ICON_SRC" "$ICON_DIR/$APP_NAME.png" 2>/dev/null
+    ffmpeg -y -i "$ICON_SRC" "$ICON_DIR/$ICON_NAME.png" 2>/dev/null
   elif command -v dwebp &>/dev/null; then
-    dwebp "$ICON_SRC" -o "$ICON_DIR/$APP_NAME.png" 2>/dev/null
+    dwebp "$ICON_SRC" -o "$ICON_DIR/$ICON_NAME.png" 2>/dev/null
   else
     echo "==> No webp converter found, trying to extract icon from AppImage ..."
     "$APP_DIR/$APPIMAGE_NAME" --appimage-extract ".DirIcon" &>/dev/null || true
     if [ -f squashfs-root/.DirIcon ]; then
-      cp squashfs-root/.DirIcon "$ICON_DIR/$APP_NAME.png" 2>/dev/null || true
+      cp squashfs-root/.DirIcon "$ICON_DIR/$ICON_NAME.png" 2>/dev/null || true
     fi
     rm -rf squashfs-root 2>/dev/null || true
   fi
@@ -62,7 +63,7 @@ else
   echo "==> butterflylogo.webp not found, extracting icon from AppImage ..."
   "$APP_DIR/$APPIMAGE_NAME" --appimage-extract ".DirIcon" &>/dev/null || true
   if [ -f squashfs-root/.DirIcon ]; then
-    cp squashfs-root/.DirIcon "$ICON_DIR/$APP_NAME.png" 2>/dev/null || true
+    cp squashfs-root/.DirIcon "$ICON_DIR/$ICON_NAME.png" 2>/dev/null || true
   fi
   rm -rf squashfs-root 2>/dev/null || true
 fi
@@ -73,7 +74,7 @@ Type=Application
 Name=$APP_NAME
 Comment=$APP_COMMENT
 Exec=$APP_DIR/$APPIMAGE_NAME
-Icon=$APP_NAME
+Icon=$ICON_NAME
 Terminal=false
 Categories=Network;InstantMessaging;
 StartupWMClass=Conversate
@@ -81,6 +82,12 @@ EOF
 
 echo "==> Updating desktop database ..."
 update-desktop-database "$DESKTOP_DIR" 2>/dev/null || true
+
+echo "==> Updating icon cache ..."
+ICON_BASE="$(dirname "$ICON_DIR")"
+if [ -d "$ICON_BASE" ] && command -v gtk-update-icon-cache &>/dev/null; then
+  gtk-update-icon-cache "$ICON_BASE" 2>/dev/null || true
+fi
 
 echo ""
 echo "==> Done! $APP_NAME has been installed."
