@@ -11,24 +11,18 @@
     body { background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 30%, #e9d5ff 60%, #fce7f3 100%); }
 
     .glass-card { background: rgba(255,255,255,0.78); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(216,180,254,0.25); box-shadow: 0 0 60px -16px rgba(168,85,247,0.12); }
+    .btn-pastel { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .btn-pastel:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -10px rgba(168,85,247,0.4); }
+    .terminal-box { background: #1e1b2e; border: 1px solid rgba(216,180,254,0.12); }
     .gradient-text { background: linear-gradient(135deg, #a855f7, #7c3aed, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
     .dl-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(216,180,254,0.18); }
     .dl-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px -14px rgba(168,85,247,0.18); }
-    .btn-grad { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); background: linear-gradient(135deg, #c084fc, #a855f7); }
-    .btn-grad:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -10px rgba(168,85,247,0.4); }
-    .btn-outline { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1.5px solid rgba(168,85,247,0.25); color: #a855f7; }
-    .btn-outline:hover { background: rgba(168,85,247,0.06); border-color: #a855f7; transform: translateY(-1px); }
-
-    .terminal-box { background: #1e1b2e; border: 1px solid rgba(216,180,254,0.12); }
-    .code-block { user-select: all; -webkit-user-select: all; }
 
     /* ── Carousel ── */
-    .carousel-wrap { position: relative; overflow: hidden; border-radius: 24px; background: linear-gradient(135deg, rgba(243,232,255,0.5), rgba(249,240,255,0.6)); border: 1px solid rgba(216,180,254,0.18); touch-action: pan-y; }
-    .carousel-track { display: flex; will-change: transform; }
-    .carousel-track.smooth { transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-    .carousel-slide { min-width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2.5rem 1.5rem; text-align: center; user-select: none; -webkit-user-select: none; }
-    .carousel-slide img, .carousel-slide svg { pointer-events: none; }
+    .carousel-wrap { position: relative; overflow: hidden; border-radius: 24px; background: linear-gradient(135deg, rgba(243,232,255,0.5), rgba(249,240,255,0.6)); border: 1px solid rgba(216,180,254,0.18); }
+    .carousel-track { display: flex; transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .carousel-slide { min-width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2.5rem 1.5rem; text-align: center; }
     .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(168,85,247,0.2); cursor: pointer; transition: all 0.3s; border: none; padding: 0; }
     .carousel-dot.active { background: #a855f7; width: 28px; border-radius: 5px; }
     .carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 40px; height: 40px; border-radius: 50%; border: none; background: rgba(255,255,255,0.9); backdrop-filter: blur(8px); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; color: #a855f7; box-shadow: 0 2px 14px rgba(168,85,247,0.12); }
@@ -43,10 +37,6 @@
     .float-c { animation: float 2.8s ease-in-out infinite; animation-delay: 1s; }
     .float-d { animation: float 3.5s ease-in-out infinite; animation-delay: 1.5s; }
     .glow-svg { filter: drop-shadow(0 0 24px rgba(168,85,247,0.15)); }
-
-    .method-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 2px 8px; border-radius: 9999px; }
-    .method-badge.simple { background: rgba(167, 243, 208, 0.3); color: #059669; }
-    .method-badge.auto { background: rgba(196, 181, 253, 0.25); color: #7c3aed; }
   </style>
 </head>
 <body>
@@ -66,8 +56,8 @@
       </div>
 
       <!-- ═══ CAROUSEL ═══ -->
-      <div class="carousel-wrap mb-6 sm:mb-8 lg:mb-10" id="carousel">
-        <div class="carousel-track smooth" id="track">
+      <div class="carousel-wrap mb-6 sm:mb-8 lg:mb-10">
+        <div class="carousel-track" id="track">
 
           <div class="carousel-slide">
             <div class="float-a glow-svg mb-3 sm:mb-4">
@@ -141,85 +131,64 @@
 
       <!-- ═══ DOWNLOADS ═══ -->
       <div class="text-center mb-4 sm:mb-5">
-        <span class="text-xs sm:text-sm font-semibold tracking-widest uppercase" style="color: rgba(168,85,247,0.45); letter-spacing: 0.12em;">Get Conversate</span>
+        <span class="text-xs sm:text-sm font-semibold tracking-widest uppercase" style="color: rgba(168,85,247,0.45); letter-spacing: 0.12em;">Download</span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
 
-        <!-- ===== Linux ===== -->
+        <!-- Linux -->
         <div class="dl-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 lg:p-6" style="background: linear-gradient(135deg, rgba(243,232,255,0.55), rgba(249,240,255,0.7));">
-          <div class="flex items-center gap-3 mb-4">
+          <div class="flex items-start gap-3 sm:gap-4">
             <div class="shrink-0 w-9 h-9 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center" style="background: rgba(168,85,247,0.1);">
               <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 3.75H6.912a2.25 2.25 0 00-2.15 1.588L2.35 13.177a2.25 2.25 0 00-.1.661V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 00-2.15-1.588H15M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859M12 3v8.25m0 0l-3-3m3 3l3-3"/>
               </svg>
             </div>
-            <div>
-              <h2 class="font-semibold text-sm sm:text-base text-gray-700">Linux</h2>
-              <p class="text-xs text-purple-300">AppImage &bull; 14 MB</p>
-            </div>
-          </div>
-
-          <!-- Method A: Download + Run -->
-          <div class="mb-3">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="method-badge simple">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
-                Simple
-              </span>
-              <span class="text-xs font-medium text-gray-500">Download &amp; run</span>
-            </div>
-            <a href="Conversate-x86_64.AppImage" download class="btn-grad w-full inline-flex items-center justify-center gap-2 text-white text-sm font-medium px-4 py-2.5 rounded-xl">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
-              Download AppImage
-            </a>
-            <p class="text-[11px] text-purple-300 mt-1.5">Make executable: <span class="font-mono text-purple-400 bg-purple-100/30 px-1.5 py-0.5 rounded">chmod +x &amp;&amp; ./Conversate</span></p>
-          </div>
-
-          <!-- Method B: One-command install -->
-          <div>
-            <div class="flex items-center gap-2 mb-2">
-              <span class="method-badge auto">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
-                Auto
-              </span>
-              <span class="text-xs font-medium text-gray-500">Install with one command</span>
-            </div>
-            <div class="terminal-box rounded-xl font-mono overflow-hidden">
-              <div class="flex items-center justify-between px-3 sm:px-3.5 py-2.5">
-                <code class="code-block text-purple-200 truncate text-[11px] sm:text-xs">wget -qO- https://work-message.onrender.com/install.sh | bash</code>
-                <button onclick="var t=this; navigator.clipboard.writeText('wget -qO- https://work-message.onrender.com/install.sh | bash').then(()=>{t.textContent='Copied!';setTimeout(()=>{t.textContent='Copy'},2000)});" class="ml-2 shrink-0 text-white text-[11px] sm:text-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg transition" style="background: rgba(168,85,247,0.28);" onmouseover="this.style.background='rgba(168,85,247,0.45)'" onmouseout="this.style.background='rgba(168,85,247,0.28)'">Copy</button>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <h2 class="font-semibold text-sm sm:text-base text-gray-700">Linux</h2>
+                <span class="text-xs text-purple-300 font-mono">14 MB</span>
+              </div>
+              <p class="text-xs text-purple-300 mt-0.5">AppImage &bull; portable, no install needed</p>
+              <div class="mt-3">
+                <a href="Conversate-x86_64.AppImage" download class="btn-pastel inline-flex items-center gap-1.5 text-white text-sm font-medium px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl" style="background: linear-gradient(135deg, #c084fc, #a855f7);">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+                  Download AppImage
+                </a>
+              </div>
+              <div class="mt-3 relative terminal-box rounded-xl text-xs font-mono overflow-hidden">
+                <div class="flex items-center justify-between px-3 sm:px-3.5 py-2 sm:py-2.5">
+                  <div class="flex items-center gap-2 min-w-0">
+                    <svg class="w-3 sm:w-3.5 h-3 sm:h-3.5 text-purple-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"/></svg>
+                    <code class="text-purple-200 truncate text-[11px] sm:text-xs">wget -qO- https://work-message.onrender.com/install.sh | bash</code>
+                  </div>
+                  <button onclick="navigator.clipboard.writeText('wget -qO- https://work-message.onrender.com/install.sh | bash').then(()=>{this.textContent='Copied!';setTimeout(()=>{this.textContent='Copy'},2000)})" class="ml-2 shrink-0 text-white text-[11px] sm:text-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg transition" style="background: rgba(168,85,247,0.28);" onmouseover="this.style.background='rgba(168,85,247,0.45)'" onmouseout="this.style.background='rgba(168,85,247,0.28)'">Copy</button>
+                </div>
               </div>
             </div>
-            <p class="text-[11px] text-purple-300 mt-1.5">Paste in terminal — auto-installs + adds app shortcut</p>
           </div>
         </div>
 
-        <!-- ===== Windows ===== -->
+        <!-- Windows -->
         <div class="dl-card rounded-2xl sm:rounded-3xl p-4 sm:p-5 lg:p-6" style="background: linear-gradient(135deg, rgba(243,232,255,0.55), rgba(249,240,255,0.7));">
-          <div class="flex items-center gap-3 mb-4">
+          <div class="flex items-start gap-3 sm:gap-4">
             <div class="shrink-0 w-9 h-9 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center" style="background: rgba(168,85,247,0.1);">
               <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500" fill="currentColor" viewBox="0 0 24 24"><path d="M0 0h11.5v11.5H0V0zm12.5 0H24v11.5H12.5V0zM0 12.5h11.5V24H0V12.5zm12.5 0H24V24H12.5V12.5z"/></svg>
             </div>
-            <div>
-              <h2 class="font-semibold text-sm sm:text-base text-gray-700">Windows</h2>
-              <p class="text-xs text-purple-300">Portable ZIP &bull; 11 MB</p>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <h2 class="font-semibold text-sm sm:text-base text-gray-700">Windows</h2>
+                <span class="text-xs text-purple-300 font-mono">11 MB</span>
+              </div>
+              <p class="text-xs text-purple-300 mt-0.5">Portable ZIP &bull; no install needed</p>
+              <div class="mt-3">
+                <a href="Messenger-win64.zip" download class="btn-pastel inline-flex items-center gap-1.5 text-white text-sm font-medium px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl" style="background: linear-gradient(135deg, #c084fc, #a855f7);">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+                  Download ZIP
+                </a>
+              </div>
+              <p class="text-xs text-purple-300 mt-3">Extract and run <span class="font-mono px-1.5 py-0.5 rounded" style="background: rgba(168,85,247,0.1); color:#a855f7;">run.bat</span></p>
             </div>
-          </div>
-
-          <div class="mb-3">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="method-badge simple">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
-                Simple
-              </span>
-              <span class="text-xs font-medium text-gray-500">Download &amp; run</span>
-            </div>
-            <a href="Messenger-win64.zip" download class="btn-grad w-full inline-flex items-center justify-center gap-2 text-white text-sm font-medium px-4 py-2.5 rounded-xl">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
-              Download ZIP
-            </a>
-            <p class="text-[11px] text-purple-300 mt-1.5">Extract and run <span class="font-mono text-purple-400 bg-purple-100/30 px-1.5 py-0.5 rounded">run.bat</span></p>
           </div>
         </div>
 
@@ -237,87 +206,11 @@
   </div>
 
   <script>
-    (function(){
-      const wrap = document.getElementById('carousel');
-      const t = document.getElementById('track');
-      const s = t.querySelectorAll('.carousel-slide');
-      const d = document.getElementById('dots');
-      const p = document.getElementById('prevBtn');
-      const n = document.getElementById('nextBtn');
-      let idx = 0, autoTimer, dragging = false, startX = 0, startY = 0, currentX = 0, moved = 0;
-
-      // Dots
-      s.forEach((_, j) => {
-        const o = document.createElement('button');
-        o.className = 'carousel-dot' + (j === 0 ? ' active' : '');
-        o.onclick = () => goTo(j);
-        d.appendChild(o);
-      });
-
-      function goTo(j, instant) {
-        idx = j;
-        if (instant) t.classList.remove('smooth');
-        else t.classList.add('smooth');
-        t.style.transform = `translateX(-${idx * 100}%)`;
-        d.querySelectorAll('.carousel-dot').forEach((e, k) => e.className = 'carousel-dot' + (k === idx ? ' active' : ''));
-        if (instant) requestAnimationFrame(() => t.classList.add('smooth'));
-        resetAuto();
-      }
-
-      function next() { goTo((idx + 1) % s.length); }
-      function prev() { goTo((idx - 1 + s.length) % s.length); }
-      p.onclick = next; n.onclick = next;
-
-      function resetAuto() { clearInterval(autoTimer); autoTimer = setInterval(next, 5000); }
-
-      // ── Drag / Flick ──
-      function onStart(x, y) {
-        dragging = true;
-        startX = x;
-        startY = y;
-        currentX = x;
-        moved = 0;
-        t.classList.remove('smooth');
-        clearInterval(autoTimer);
-      }
-
-      function onMove(x, y) {
-        if (!dragging) return;
-        const dx = x - currentX; currentX = x;
-        const total = x - startX;
-        moved += Math.abs(dx);
-        const base = -idx * 100;
-        const pct = (total / wrap.offsetWidth) * 100;
-        let translate = base + pct;
-        // clamp edges
-        if (idx === 0 && pct > 0) translate = base + pct * 0.2;
-        if (idx === s.length - 1 && pct < 0) translate = base + pct * 0.2;
-        t.style.transform = `translateX(${translate}%)`;
-      }
-
-      function onEnd() {
-        if (!dragging) return;
-        dragging = false;
-        t.classList.add('smooth');
-        const dx = (currentX - startX) / wrap.offsetWidth;
-        if (dx < -0.12) next();
-        else if (dx > 0.12) prev();
-        else goTo(idx);
-        resetAuto();
-      }
-
-      // Touch
-      wrap.addEventListener('touchstart', e => { onStart(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
-      wrap.addEventListener('touchmove', e => { onMove(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
-      wrap.addEventListener('touchend', onEnd, { passive: true });
-
-      // Mouse
-      wrap.addEventListener('mousedown', e => { onStart(e.clientX, e.clientY); e.preventDefault(); });
-      window.addEventListener('mousemove', e => { onMove(e.clientX, e.clientY); });
-      window.addEventListener('mouseup', onEnd);
-
-      resetAuto();
-    })();
+    (function(){const t=document.getElementById('track'),s=t.querySelectorAll('.carousel-slide'),d=document.getElementById('dots'),p=document.getElementById('prevBtn'),n=document.getElementById('nextBtn');let i=0,a;
+    s.forEach((_,j)=>{const o=document.createElement('button');o.className='carousel-dot'+(j===0?' active':'');o.onclick=()=>g(j);d.appendChild(o)});
+    function g(j){i=j;t.style.transform=`translateX(-${i*100}%)`;d.querySelectorAll('.carousel-dot').forEach((e,k)=>e.className='carousel-dot'+(k===i?' active':''));r()}
+    function r(){clearInterval(a);a=setInterval(()=>g((i+1)%s.length),4500)}
+    p.onclick=()=>g((i-1+s.length)%s.length);n.onclick=()=>g((i+1)%s.length);r()})();
   </script>
 </body>
 </html>
