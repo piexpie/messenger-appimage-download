@@ -20,9 +20,11 @@
     .dl-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px -14px rgba(168,85,247,0.18); }
 
     /* ── Carousel ── */
-    .carousel-wrap { position: relative; overflow: hidden; border-radius: 24px; background: linear-gradient(135deg, rgba(243,232,255,0.5), rgba(249,240,255,0.6)); border: 1px solid rgba(216,180,254,0.18); }
-    .carousel-track { display: flex; transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-    .carousel-slide { min-width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2.5rem 1.5rem; text-align: center; }
+    .carousel-wrap { position: relative; overflow: hidden; border-radius: 24px; background: linear-gradient(135deg, rgba(243,232,255,0.5), rgba(249,240,255,0.6)); border: 1px solid rgba(216,180,254,0.18); touch-action: pan-y; }
+    .carousel-track { display: flex; will-change: transform; }
+    .carousel-track.smooth { transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .carousel-slide { min-width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2.5rem 1.5rem; text-align: center; user-select: none; -webkit-user-select: none; }
+    .carousel-slide img, .carousel-slide svg { pointer-events: none; }
     .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(168,85,247,0.2); cursor: pointer; transition: all 0.3s; border: none; padding: 0; }
     .carousel-dot.active { background: #a855f7; width: 28px; border-radius: 5px; }
     .carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 40px; height: 40px; border-radius: 50%; border: none; background: rgba(255,255,255,0.9); backdrop-filter: blur(8px); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; color: #a855f7; box-shadow: 0 2px 14px rgba(168,85,247,0.12); }
@@ -56,8 +58,8 @@
       </div>
 
       <!-- ═══ CAROUSEL ═══ -->
-      <div class="carousel-wrap mb-6 sm:mb-8 lg:mb-10">
-        <div class="carousel-track" id="track">
+      <div class="carousel-wrap mb-6 sm:mb-8 lg:mb-10" id="carousel">
+        <div class="carousel-track smooth" id="track">
 
           <div class="carousel-slide">
             <div class="float-a glow-svg mb-3 sm:mb-4">
@@ -206,11 +208,79 @@
   </div>
 
   <script>
-    (function(){const t=document.getElementById('track'),s=t.querySelectorAll('.carousel-slide'),d=document.getElementById('dots'),p=document.getElementById('prevBtn'),n=document.getElementById('nextBtn');let i=0,a;
-    s.forEach((_,j)=>{const o=document.createElement('button');o.className='carousel-dot'+(j===0?' active':'');o.onclick=()=>g(j);d.appendChild(o)});
-    function g(j){i=j;t.style.transform=`translateX(-${i*100}%)`;d.querySelectorAll('.carousel-dot').forEach((e,k)=>e.className='carousel-dot'+(k===i?' active':''));r()}
-    function r(){clearInterval(a);a=setInterval(()=>g((i+1)%s.length),4500)}
-    p.onclick=()=>g((i-1+s.length)%s.length);n.onclick=()=>g((i+1)%s.length);r()})();
+    (function(){
+      const wrap = document.getElementById('carousel');
+      const t = document.getElementById('track');
+      const s = t.querySelectorAll('.carousel-slide');
+      const d = document.getElementById('dots');
+      const p = document.getElementById('prevBtn');
+      const n = document.getElementById('nextBtn');
+      let idx = 0, autoTimer, dragging = false, startX = 0, startY = 0, currentX = 0, moved = 0;
+
+      s.forEach((_, j) => {
+        const o = document.createElement('button');
+        o.className = 'carousel-dot' + (j === 0 ? ' active' : '');
+        o.onclick = () => goTo(j);
+        d.appendChild(o);
+      });
+
+      function goTo(j, instant) {
+        idx = j;
+        if (instant) t.classList.remove('smooth');
+        else t.classList.add('smooth');
+        t.style.transform = `translateX(-${idx * 100}%)`;
+        d.querySelectorAll('.carousel-dot').forEach((e, k) => e.className = 'carousel-dot' + (k === idx ? ' active' : ''));
+        if (instant) requestAnimationFrame(() => t.classList.add('smooth'));
+        resetAuto();
+      }
+
+      function next() { goTo((idx + 1) % s.length); }
+      function prev() { goTo((idx - 1 + s.length) % s.length); }
+      p.onclick = prev; n.onclick = next;
+
+      function resetAuto() { clearInterval(autoTimer); autoTimer = setInterval(next, 5000); }
+
+      function onStart(x, y) {
+        dragging = true;
+        startX = x; startY = y;
+        currentX = x; moved = 0;
+        t.classList.remove('smooth');
+        clearInterval(autoTimer);
+      }
+
+      function onMove(x, y) {
+        if (!dragging) return;
+        const dx = x - currentX; currentX = x;
+        const total = x - startX;
+        moved += Math.abs(dx);
+        const base = -idx * 100;
+        const pct = (total / wrap.offsetWidth) * 100;
+        let translate = base + pct;
+        if (idx === 0 && pct > 0) translate = base + pct * 0.2;
+        if (idx === s.length - 1 && pct < 0) translate = base + pct * 0.2;
+        t.style.transform = `translateX(${translate}%)`;
+      }
+
+      function onEnd() {
+        if (!dragging) return;
+        dragging = false;
+        t.classList.add('smooth');
+        const dx = (currentX - startX) / wrap.offsetWidth;
+        if (dx < -0.12) next();
+        else if (dx > 0.12) prev();
+        else goTo(idx);
+        resetAuto();
+      }
+
+      wrap.addEventListener('touchstart', e => { onStart(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+      wrap.addEventListener('touchmove', e => { onMove(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+      wrap.addEventListener('touchend', onEnd, { passive: true });
+      wrap.addEventListener('mousedown', e => { onStart(e.clientX, e.clientY); e.preventDefault(); });
+      window.addEventListener('mousemove', e => { onMove(e.clientX, e.clientY); });
+      window.addEventListener('mouseup', onEnd);
+
+      resetAuto();
+    })();
   </script>
 </body>
 </html>
