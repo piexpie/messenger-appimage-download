@@ -3,56 +3,148 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Download Messenger</title>
+  <title>Conversate — Work Messages, Audio & Visuals, Fast</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            pviolet: { 50: '#faf5ff', 100: '#f3e8ff', 200: '#e9d5ff', 300: '#d8b4fe', 400: '#c084fc', 500: '#a855f7', 600: '#9333ea' },
+            plavender: { 50: '#f8f7ff', 100: '#efe9fe', 200: '#ddd6fe', 300: '#c4b5fd', 400: '#a78bfa', 500: '#8b5cf6' },
+            prose: { 100: '#f5f0ff', 200: '#ede4ff', 300: '#d4c4ff' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    * { font-family: 'Inter', system-ui, sans-serif; }
+    body { background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 30%, #e9d5ff 60%, #fce7f3 100%); }
+    .glass { background: rgba(255,255,255,0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+    .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .card-hover:hover { transform: translateY(-2px); box-shadow: 0 12px 40px -12px rgba(168,85,247,0.25); }
+    .btn-pastel { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .btn-pastel:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -8px rgba(168,85,247,0.35); }
+    .terminal { background: #1e1b2e; border: 1px solid rgba(216,180,254,0.15); }
+    .gradient-text {
+      background: linear-gradient(135deg, #a855f7, #7c3aed, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .glow { box-shadow: 0 0 40px -8px rgba(168,85,247,0.15); }
+    .feature-icon { width: 48px; height: 48px; border-radius: 16px; display: flex; align-items: center; justify-content: center; }
+    .download-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .download-card:hover { transform: translateY(-2px); }
+    .section-label { letter-spacing: 0.05em; text-transform: uppercase; font-size: 0.65rem; font-weight: 600; color: rgba(168,85,247,0.5); margin-bottom: 0.75rem; }
+    .tag { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 9999px; font-size: 0.65rem; font-weight: 500; background: rgba(168,85,247,0.1); color: #a855f7; }
+  </style>
 </head>
-<body class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 min-h-screen flex items-center justify-center p-4">
-  <div class="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-10 max-w-xl w-full">
+<body class="min-h-screen flex items-center justify-center p-4">
+  <div class="glass rounded-3xl shadow-2xl p-8 md:p-10 max-w-xl w-full glow" style="border:1px solid rgba(216,180,254,0.3)">
 
-    <!-- Header -->
-    <div class="text-center mb-8">
-      <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-lg mb-4">
-        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <!-- ═══ HERO ═══ -->
+    <div class="text-center mb-10">
+      <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl shadow-lg mb-5" style="background: linear-gradient(135deg, #e9d5ff, #c084fc);">
+        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
         </svg>
       </div>
-      <h1 class="text-3xl font-bold text-gray-800">Messenger</h1>
-      <p class="text-gray-400 text-sm mt-1">Choose your platform to get started</p>
+      <h1 class="text-5xl font-extrabold gradient-text leading-tight">Conversate</h1>
+      <p class="text-purple-400 text-sm mt-2 font-medium">Work Messages · Audio · Visuals · Fast</p>
+      <div class="flex items-center justify-center gap-2 mt-3">
+        <span class="tag">Cross-platform</span>
+        <span class="tag">No install</span>
+        <span class="tag">Lightweight</span>
+      </div>
     </div>
 
+    <!-- ═══ FEATURES ═══ -->
+    <div class="mb-10">
+      <div class="section-label text-center mb-4">What you can do</div>
+      <div class="grid grid-cols-2 gap-3">
+        <!-- Messages -->
+        <div class="rounded-2xl p-4 flex flex-col items-center text-center card-hover" style="background: rgba(243,232,255,0.5); border:1px solid rgba(216,180,254,0.2);">
+          <div class="feature-icon mb-3" style="background: rgba(168,85,247,0.12);">
+            <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/>
+            </svg>
+          </div>
+          <h3 class="text-sm font-semibold text-gray-700">Messaging</h3>
+          <p class="text-xs text-purple-400 mt-1">Rich text &amp; instant replies</p>
+        </div>
+        <!-- Audio -->
+        <div class="rounded-2xl p-4 flex flex-col items-center text-center card-hover" style="background: rgba(243,232,255,0.5); border:1px solid rgba(216,180,254,0.2);">
+          <div class="feature-icon mb-3" style="background: rgba(168,85,247,0.12);">
+            <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
+            </svg>
+          </div>
+          <h3 class="text-sm font-semibold text-gray-700">Audio Calls</h3>
+          <p class="text-xs text-purple-400 mt-1">Crystal-clear voice</p>
+        </div>
+        <!-- Visuals -->
+        <div class="rounded-2xl p-4 flex flex-col items-center text-center card-hover" style="background: rgba(243,232,255,0.5); border:1px solid rgba(216,180,254,0.2);">
+          <div class="feature-icon mb-3" style="background: rgba(168,85,247,0.12);">
+            <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+            </svg>
+          </div>
+          <h3 class="text-sm font-semibold text-gray-700">Video Calls</h3>
+          <p class="text-xs text-purple-400 mt-1">HD screen sharing</p>
+        </div>
+        <!-- Fast -->
+        <div class="rounded-2xl p-4 flex flex-col items-center text-center card-hover" style="background: rgba(243,232,255,0.5); border:1px solid rgba(216,180,254,0.2);">
+          <div class="feature-icon mb-3" style="background: rgba(168,85,247,0.12);">
+            <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+            </svg>
+          </div>
+          <h3 class="text-sm font-semibold text-gray-700">Blazing Fast</h3>
+          <p class="text-xs text-purple-400 mt-1">Built for speed</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ DOWNLOAD ═══ -->
+    <div class="section-label text-center mb-4">Download</div>
+
     <!-- Linux -->
-    <div class="bg-gradient-to-r from-gray-50 to-gray-100/80 rounded-2xl p-5 mb-4 border border-gray-200/60 hover:border-indigo-200 transition">
+    <div class="rounded-2xl p-5 mb-3 download-card" style="background: linear-gradient(135deg, rgba(243,232,255,0.6), rgba(249,240,255,0.8)); border:1px solid rgba(216,180,254,0.25);">
       <div class="flex items-start gap-4">
-        <div class="shrink-0 w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center">
-          <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <div class="shrink-0 w-10 h-10 rounded-xl flex items-center justify-center" style="background: rgba(168,85,247,0.12);">
+          <svg class="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 3.75H6.912a2.25 2.25 0 00-2.15 1.588L2.35 13.177a2.25 2.25 0 00-.1.661V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 00-2.15-1.588H15M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859M12 3v8.25m0 0l-3-3m3 3l3-3"/>
           </svg>
         </div>
         <div class="flex-1 min-w-0">
           <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-gray-800">Linux</h2>
-            <span class="text-xs text-gray-400 font-mono">14M</span>
+            <h2 class="font-semibold text-gray-700">Linux</h2>
+            <span class="text-xs text-purple-300 font-mono">14 MB</span>
           </div>
-          <p class="text-xs text-gray-400 mt-0.5">AppImage &bull; portable, no install needed</p>
-          <div class="mt-3 flex flex-wrap gap-2">
-            <a href="Messenger-x86_64.AppImage" download
-               class="inline-flex items-center gap-1.5 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-medium px-5 py-2.5 rounded-xl hover:from-indigo-600 hover:to-purple-700 transition transform hover:-translate-y-0.5 hover:shadow-lg shadow-indigo-200">
+          <p class="text-xs text-purple-300 mt-0.5">AppImage &bull; portable, no install needed</p>
+          <div class="mt-3">
+            <a href="Conversate-x86_64.AppImage" download
+               class="btn-pastel inline-flex items-center gap-1.5 text-white text-sm font-medium px-5 py-2.5 rounded-xl" style="background: linear-gradient(135deg, #c084fc, #a855f7);">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/>
               </svg>
               Download AppImage
             </a>
           </div>
-          <div class="mt-3 relative bg-gray-900 rounded-xl text-xs font-mono overflow-hidden">
+          <div class="mt-3 relative terminal rounded-xl text-xs font-mono overflow-hidden">
             <div class="flex items-center justify-between px-3.5 py-2.5">
               <div class="flex items-center gap-2 min-w-0">
-                <svg class="w-3.5 h-3.5 text-gray-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <svg class="w-3.5 h-3.5 text-purple-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"/>
                 </svg>
-                <code class="text-green-400 truncate">wget -qO- https://work-message.onrender.com/install.sh | bash</code>
+                <code class="text-purple-200 truncate">wget -qO- https://work-message.onrender.com/install.sh | bash</code>
               </div>
               <button onclick="navigator.clipboard.writeText('wget -qO- https://work-message.onrender.com/install.sh | bash').then(()=>{this.textContent='Copied!';setTimeout(()=>{this.textContent='Copy'},2000)})"
-                      class="ml-3 shrink-0 bg-gray-700 hover:bg-gray-600 text-white text-xs px-3 py-1.5 rounded-lg transition">
+                      class="ml-3 shrink-0 text-white text-xs px-3 py-1.5 rounded-lg transition" style="background: rgba(168,85,247,0.3);" onmouseover="this.style.background='rgba(168,85,247,0.5)'" onmouseout="this.style.background='rgba(168,85,247,0.3)'">
                 Copy
               </button>
             </div>
@@ -62,37 +154,39 @@
     </div>
 
     <!-- Windows -->
-    <div class="bg-gradient-to-r from-gray-50 to-gray-100/80 rounded-2xl p-5 border border-gray-200/60 hover:border-emerald-200 transition">
+    <div class="rounded-2xl p-5 download-card" style="background: linear-gradient(135deg, rgba(243,232,255,0.6), rgba(249,240,255,0.8)); border:1px solid rgba(216,180,254,0.25);">
       <div class="flex items-start gap-4">
-        <div class="shrink-0 w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center">
-          <svg class="w-5 h-5 text-emerald-600" fill="currentColor" viewBox="0 0 24 24">
+        <div class="shrink-0 w-10 h-10 rounded-xl flex items-center justify-center" style="background: rgba(168,85,247,0.12);">
+          <svg class="w-5 h-5 text-purple-500" fill="currentColor" viewBox="0 0 24 24">
             <path d="M0 0h11.5v11.5H0V0zm12.5 0H24v11.5H12.5V0zM0 12.5h11.5V24H0V12.5zm12.5 0H24V24H12.5V12.5z"/>
           </svg>
         </div>
         <div class="flex-1 min-w-0">
           <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-gray-800">Windows</h2>
-            <span class="text-xs text-gray-400 font-mono">11M</span>
+            <h2 class="font-semibold text-gray-700">Windows</h2>
+            <span class="text-xs text-purple-300 font-mono">11 MB</span>
           </div>
-          <p class="text-xs text-gray-400 mt-0.5">Portable ZIP &bull; no installation required</p>
-          <div class="mt-3 flex flex-wrap gap-2">
+          <p class="text-xs text-purple-300 mt-0.5">Portable ZIP &bull; no installation required</p>
+          <div class="mt-3">
             <a href="Messenger-win64.zip" download
-               class="inline-flex items-center gap-1.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-sm font-medium px-5 py-2.5 rounded-xl hover:from-emerald-600 hover:to-teal-700 transition transform hover:-translate-y-0.5 hover:shadow-lg shadow-emerald-200">
+               class="btn-pastel inline-flex items-center gap-1.5 text-white text-sm font-medium px-5 py-2.5 rounded-xl" style="background: linear-gradient(135deg, #c084fc, #a855f7);">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/>
               </svg>
               Download ZIP
             </a>
           </div>
-          <p class="text-xs text-gray-400 mt-3">Extract and run <span class="font-mono text-gray-500 bg-gray-200/60 px-1.5 py-0.5 rounded">run.bat</span></p>
+          <p class="text-xs text-purple-300 mt-3">Extract and run <span class="font-mono px-1.5 py-0.5 rounded" style="background: rgba(168,85,247,0.1); color:#a855f7;">run.bat</span></p>
         </div>
       </div>
     </div>
 
     <!-- Footer -->
-    <p class="text-center text-xs text-gray-400 mt-6">
-      No installation required for either version &mdash; just download and run.
-    </p>
+    <div class="flex items-center justify-center gap-3 mt-8 pt-5" style="border-top: 1px solid rgba(216,180,254,0.2);">
+      <span class="text-xs" style="color: rgba(168,85,247,0.4);">No installation required</span>
+      <span style="color: rgba(168,85,247,0.15);">&middot;</span>
+      <span class="text-xs" style="color: rgba(168,85,247,0.4);">Just download &amp; run</span>
+    </div>
   </div>
 </body>
 </html>
