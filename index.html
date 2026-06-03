@@ -11,8 +11,6 @@
         extend: {
           colors: {
             pviolet: { 50: '#faf5ff', 100: '#f3e8ff', 200: '#e9d5ff', 300: '#d8b4fe', 400: '#c084fc', 500: '#a855f7', 600: '#9333ea' },
-            plavender: { 50: '#f8f7ff', 100: '#efe9fe', 200: '#ddd6fe', 300: '#c4b5fd', 400: '#a78bfa', 500: '#8b5cf6' },
-            prose: { 100: '#f5f0ff', 200: '#ede4ff', 300: '#d4c4ff' }
           }
         }
       }
@@ -23,8 +21,6 @@
     * { font-family: 'Inter', system-ui, sans-serif; }
     body { background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 30%, #e9d5ff 60%, #fce7f3 100%); }
     .glass { background: rgba(255,255,255,0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-    .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-    .card-hover:hover { transform: translateY(-2px); box-shadow: 0 12px 40px -12px rgba(168,85,247,0.25); }
     .btn-pastel { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
     .btn-pastel:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -8px rgba(168,85,247,0.35); }
     .terminal { background: #1e1b2e; border: 1px solid rgba(216,180,254,0.15); }
@@ -35,78 +31,129 @@
       background-clip: text;
     }
     .glow { box-shadow: 0 0 40px -8px rgba(168,85,247,0.15); }
-    .feature-icon { width: 48px; height: 48px; border-radius: 16px; display: flex; align-items: center; justify-content: center; }
     .download-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
     .download-card:hover { transform: translateY(-2px); }
     .section-label { letter-spacing: 0.05em; text-transform: uppercase; font-size: 0.65rem; font-weight: 600; color: rgba(168,85,247,0.5); margin-bottom: 0.75rem; }
-    .tag { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 9999px; font-size: 0.65rem; font-weight: 500; background: rgba(168,85,247,0.1); color: #a855f7; }
+
+    /* ── Carousel ── */
+    .carousel-wrap { position: relative; overflow: hidden; border-radius: 20px; }
+    .carousel-track { display: flex; transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .carousel-slide { min-width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1.5rem; text-align: center; }
+    .carousel-slide svg { display: block; }
+    .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(168,85,247,0.2); cursor: pointer; transition: all 0.3s; border: none; padding: 0; }
+    .carousel-dot.active { background: #a855f7; width: 24px; border-radius: 4px; }
+    .carousel-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 36px; height: 36px; border-radius: 50%; border: none; background: rgba(255,255,255,0.85); backdrop-filter: blur(8px); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; color: #a855f7; box-shadow: 0 2px 12px rgba(168,85,247,0.15); }
+    .carousel-arrow:hover { background: white; transform: translateY(-50%) scale(1.1); }
+    .carousel-arrow.prev { left: 10px; }
+    .carousel-arrow.next { right: 10px; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    .float-anim { animation: float 3s ease-in-out infinite; }
+    @keyframes pulse-soft {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    .pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
+    .glow-circle { filter: drop-shadow(0 0 20px rgba(168,85,247,0.2)); }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
   <div class="glass rounded-3xl shadow-2xl p-8 md:p-10 max-w-xl w-full glow" style="border:1px solid rgba(216,180,254,0.3)">
 
-    <!-- ═══ HERO ═══ -->
-    <div class="text-center mb-10">
-      <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl shadow-lg mb-5" style="background: linear-gradient(135deg, #e9d5ff, #c084fc);">
-        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+    <!-- ═══ LOGO ═══ -->
+    <div class="text-center mb-6">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl shadow-lg mb-3" style="background: linear-gradient(135deg, #e9d5ff, #c084fc);">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
         </svg>
       </div>
-      <h1 class="text-5xl font-extrabold gradient-text leading-tight">Conversate</h1>
-      <p class="text-purple-400 text-sm mt-2 font-medium">Work Messages · Audio · Visuals · Fast</p>
-      <div class="flex items-center justify-center gap-2 mt-3">
-        <span class="tag">Cross-platform</span>
-        <span class="tag">No install</span>
-        <span class="tag">Lightweight</span>
-      </div>
+      <h1 class="text-3xl font-extrabold gradient-text leading-tight">Conversate</h1>
+      <p class="text-purple-400 text-xs mt-1 font-medium">Work Messages · Audio · Visuals · Fast</p>
     </div>
 
-    <!-- ═══ FEATURES ═══ -->
-    <div class="mb-10">
-      <div class="section-label text-center mb-4">What you can do</div>
-      <div class="grid grid-cols-2 gap-3">
-        <!-- Messages -->
-        <div class="rounded-2xl p-4 flex flex-col items-center text-center card-hover" style="background: rgba(243,232,255,0.5); border:1px solid rgba(216,180,254,0.2);">
-          <div class="feature-icon mb-3" style="background: rgba(168,85,247,0.12);">
-            <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/>
+    <!-- ═══ CAROUSEL HERO ═══ -->
+    <div class="carousel-wrap mb-6" style="background: linear-gradient(135deg, rgba(243,232,255,0.5), rgba(249,240,255,0.7)); border:1px solid rgba(216,180,254,0.2);">
+      <div class="carousel-track" id="track">
+
+        <!-- Slide 1 – Messaging -->
+        <div class="carousel-slide">
+          <div class="float-anim glow-circle mb-4">
+            <svg width="160" height="120" viewBox="0 0 160 120" fill="none">
+              <rect x="10" y="10" width="140" height="100" rx="16" fill="white" stroke="#e9d5ff" stroke-width="2"/>
+              <rect x="24" y="30" width="80" height="8" rx="4" fill="#f3e8ff"/>
+              <rect x="24" y="46" width="60" height="8" rx="4" fill="#f3e8ff"/>
+              <rect x="24" y="62" width="70" height="8" rx="4" fill="#f3e8ff"/>
+              <circle cx="112" cy="68" r="18" fill="url(#g1)"/>
+              <path d="M108 68l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs><linearGradient id="g1" x1="94" y1="50" x2="130" y2="86"><stop stop-color="#d8b4fe"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
             </svg>
           </div>
-          <h3 class="text-sm font-semibold text-gray-700">Messaging</h3>
-          <p class="text-xs text-purple-400 mt-1">Rich text &amp; instant replies</p>
+          <h2 class="text-lg font-bold text-gray-800 mb-1">Messaging</h2>
+          <p class="text-xs text-purple-400 max-w-xs">Rich text, emoji reactions, threads — stay in sync with your team.</p>
         </div>
-        <!-- Audio -->
-        <div class="rounded-2xl p-4 flex flex-col items-center text-center card-hover" style="background: rgba(243,232,255,0.5); border:1px solid rgba(216,180,254,0.2);">
-          <div class="feature-icon mb-3" style="background: rgba(168,85,247,0.12);">
-            <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
+
+        <!-- Slide 2 – Audio -->
+        <div class="carousel-slide">
+          <div class="float-anim glow-circle mb-4" style="animation-delay:0.5s">
+            <svg width="160" height="120" viewBox="0 0 160 120" fill="none">
+              <rect x="10" y="10" width="140" height="100" rx="16" fill="white" stroke="#e9d5ff" stroke-width="2"/>
+              <path d="M60 40v40a20 20 0 0040 0V40a20 20 0 00-40 0z" stroke="#d8b4fe" stroke-width="2" fill="#faf5ff"/>
+              <path d="M48 52v16a32 32 0 0064 0V52" stroke="#c084fc" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M80 80v16m-8 0h16" stroke="#a855f7" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="120" cy="36" r="14" fill="url(#g2)"/>
+              <path d="M116 36l2.5 2.5 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs><linearGradient id="g2" x1="106" y1="22" x2="134" y2="50"><stop stop-color="#d8b4fe"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
             </svg>
           </div>
-          <h3 class="text-sm font-semibold text-gray-700">Audio Calls</h3>
-          <p class="text-xs text-purple-400 mt-1">Crystal-clear voice</p>
+          <h2 class="text-lg font-bold text-gray-800 mb-1">Audio Calls</h2>
+          <p class="text-xs text-purple-400 max-w-xs">Crystal-clear voice with noise suppression. Works over any connection.</p>
         </div>
-        <!-- Visuals -->
-        <div class="rounded-2xl p-4 flex flex-col items-center text-center card-hover" style="background: rgba(243,232,255,0.5); border:1px solid rgba(216,180,254,0.2);">
-          <div class="feature-icon mb-3" style="background: rgba(168,85,247,0.12);">
-            <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+
+        <!-- Slide 3 – Video -->
+        <div class="carousel-slide">
+          <div class="float-anim glow-circle mb-4" style="animation-delay:1s">
+            <svg width="160" height="120" viewBox="0 0 160 120" fill="none">
+              <rect x="12" y="20" width="100" height="70" rx="12" fill="white" stroke="#e9d5ff" stroke-width="2"/>
+              <circle cx="62" cy="48" r="10" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1.5"/>
+              <path d="M42 78c0-12 10-20 20-20s20 8 20 20" stroke="#d8b4fe" stroke-width="1.5" fill="none"/>
+              <path d="M120 40l28-18v68l-28-18V40z" fill="url(#g3)" stroke="#c084fc" stroke-width="1.5"/>
+              <circle cx="132" cy="60" r="6" fill="white" opacity="0.4"/>
+              <defs><linearGradient id="g3" x1="120" y1="22" x2="148" y2="90"><stop stop-color="#d8b4fe"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
             </svg>
           </div>
-          <h3 class="text-sm font-semibold text-gray-700">Video Calls</h3>
-          <p class="text-xs text-purple-400 mt-1">HD screen sharing</p>
+          <h2 class="text-lg font-bold text-gray-800 mb-1">Video Calls</h2>
+          <p class="text-xs text-purple-400 max-w-xs">HD video with screen sharing. See and share in real-time.</p>
         </div>
-        <!-- Fast -->
-        <div class="rounded-2xl p-4 flex flex-col items-center text-center card-hover" style="background: rgba(243,232,255,0.5); border:1px solid rgba(216,180,254,0.2);">
-          <div class="feature-icon mb-3" style="background: rgba(168,85,247,0.12);">
-            <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+
+        <!-- Slide 4 – Fast -->
+        <div class="carousel-slide">
+          <div class="float-anim glow-circle mb-4" style="animation-delay:1.5s">
+            <svg width="160" height="120" viewBox="0 0 160 120" fill="none">
+              <rect x="10" y="10" width="140" height="100" rx="16" fill="white" stroke="#e9d5ff" stroke-width="2"/>
+              <path d="M80 20l-8 36h16l-12 40" stroke="#c084fc" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <circle cx="80" cy="90" r="8" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1.5"/>
+              <path d="M30 55h8m84 0h8m-50-24v-8m0 56v-6" stroke="#d8b4fe" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="80" cy="55" r="20" fill="url(#g4)" opacity="0.15"/>
+              <defs><linearGradient id="g4" x1="60" y1="35" x2="100" y2="75"><stop stop-color="#d8b4fe"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
             </svg>
           </div>
-          <h3 class="text-sm font-semibold text-gray-700">Blazing Fast</h3>
-          <p class="text-xs text-purple-400 mt-1">Built for speed</p>
+          <h2 class="text-lg font-bold text-gray-800 mb-1">Blazing Fast</h2>
+          <p class="text-xs text-purple-400 max-w-xs">Built for speed. Messages arrive instantly, calls connect in a snap.</p>
         </div>
+
       </div>
+
+      <button class="carousel-arrow prev" id="prevBtn">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <button class="carousel-arrow next" id="nextBtn">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </button>
+
+      <div class="flex items-center justify-center gap-2 pb-5" id="dots"></div>
     </div>
 
     <!-- ═══ DOWNLOAD ═══ -->
@@ -188,5 +235,37 @@
       <span class="text-xs" style="color: rgba(168,85,247,0.4);">Just download &amp; run</span>
     </div>
   </div>
+
+  <script>
+    const track = document.getElementById('track');
+    const slides = track.querySelectorAll('.carousel-slide');
+    const dotsContainer = document.getElementById('dots');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let idx = 0, autoTimer;
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.onclick = () => goTo(i);
+      dotsContainer.appendChild(dot);
+    });
+
+    function goTo(i) {
+      idx = i;
+      track.style.transform = `translateX(-${idx * 100}%)`;
+      dotsContainer.querySelectorAll('.carousel-dot').forEach((d, j) => d.className = 'carousel-dot' + (j === idx ? ' active' : ''));
+      resetAuto();
+    }
+
+    function next() { goTo((idx + 1) % slides.length); }
+    function prev() { goTo((idx - 1 + slides.length) % slides.length); }
+
+    prevBtn.onclick = prev;
+    nextBtn.onclick = next;
+
+    function resetAuto() { clearInterval(autoTimer); autoTimer = setInterval(next, 4500); }
+    resetAuto();
+  </script>
 </body>
 </html>
